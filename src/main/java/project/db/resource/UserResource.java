@@ -21,6 +21,12 @@ public class UserResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> findAll(){
 		List<User> list = userService.findAll();
+		/*List<UserDTO> lisyDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		 * expressão lambda para chamar o DTO e converter na entidade esclhida
+		 * Para fazer isso precisa add as variaveis e o construtor la na "classe DTO"
+		 * essa praatica é usada nop get pata que não venha informações desnecessarias 
+		 * no console de REDE no navegador "network", Para isso tmb é 
+		 * preciso mexer no DTO e colocar la as informações q eu desejo requuisitar*/
 		return ResponseEntity.ok().body(list);
 	}
 }
