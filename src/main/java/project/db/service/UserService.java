@@ -24,4 +24,13 @@ public class UserService {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new Obj404Exception("Objeto não encontrado"));
 	}
+	
+	public User insert(User obg) {
+		return repo.save(obg);
+	}
+	
+	/*Outras Possiblidade de POST
+	 * punlic User fromDTO(UserDTO objDTo){
+	 * return new User(obtDTO.getID(), objDTO.getName(), objDTO.getEmail()*);
+	 } */
 }
