@@ -1,9 +1,12 @@
 package project.db.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 /*Para dizer que essa entitdade corresponde a uma anotação do mongoDB*/
 
@@ -15,6 +18,13 @@ public class User implements Serializable/* serve para converter os objetos em B
 	private String id;
 	private String name;
 	private String email;
+
+	@DBRef(lazy=true)/*Quando você coloca a anotação @DBRef 
+	em um campo de uma classe de entidade, você 
+	está indicando ao Spring Data MongoDB que 
+	esse campo contém uma referência a outro 
+	documento em uma coleção diferente*/
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 	}
@@ -50,6 +60,15 @@ public class User implements Serializable/* serve para converter os objetos em B
 		this.email = email;
 	}
 
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
